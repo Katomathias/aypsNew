@@ -263,7 +263,7 @@ const Explore = ({ navigation }) => {
   );
 
   return (
-    <ImageBackground source={require('../assets/wall1.jpg')} style={styles.backgroundImage}>
+    <ImageBackground source={require('../assets/crop.jpg')} style={styles.backgroundImage}>
       <FlatList 
         data={cards}
         renderItem={renderItem}

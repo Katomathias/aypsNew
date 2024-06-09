@@ -15,6 +15,7 @@ import ContactUs from './components/ContactUs';
 import LogOut from './components/LogOut';
 import Forecast from './components/Forecast';
 import Linkss from './components/Linkss';
+import Guide from './components/Guide';
 
 
 
@@ -38,6 +39,7 @@ export default function App() {
               <Stack.Screen name="SplashScreen" component={SplashScreen} />  
               <Stack.Screen name="CropClass" component={CropClass} />   
               <Stack.Screen name="Disease" component={Disease} />
+              <Stack.Screen name="Guide" component={Guide} />
               <Stack.Screen name="forecast" component={Forecast} />
               <Stack.Screen name="Home" component={HomeScreen} />
               <Stack.Screen name="Linkss" component={Linkss} />

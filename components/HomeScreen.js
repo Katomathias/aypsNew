@@ -1,37 +1,64 @@
 // HomeScreen.js
 import React from 'react';
-import { View, Text, Button, StyleSheet, ImageBackground } from 'react-native';
+import { View, Text, Button, StyleSheet, ImageBackground,Alert } from 'react-native';
 import { Card } from 'react-native-elements';
 
 
+
+const showAlert = () => {
+  Alert.alert(
+    'Information',
+    'We are currently working with Disease Prediction of Maize and we are predicting the following Diseases: Corn_(maize)___Common_rust_, Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot, Corn_(maize)___healthy, Corn_(maize)___Northern_Leaf_Blight',
+   
+    [
+      { text: 'OK', onPress: () => console.log('OK Pressed') },
+    ],
+    { cancelable: false }
+  );
+};
+
+const showCrop = () => {
+  Alert.alert(
+    'Information',
+    'Crops such as "Cassava","Vanilla","Coffee","Cotton" ,"Tea","Tobacco","Groundnuts","Yams","Maize (corn)","Beans","Irish Potato","Matooke","Sweet Banana","Sugarcane...Are predicted basing on the input sensor data provided ',
+   
+    [
+      { text: 'OK', onPress: () => console.log('OK Pressed') },
+    ],
+    { cancelable: false }
+  );
+};
 const HomeScreen = ({ navigation }) => (
+ 
   <ImageBackground source={require('../assets/wall.jpg')} style={styles.backgroundImage}>
   <View style={styles.container}>
     <Card containerStyle={styles.card1}>
-      <Text style={styles.cardTitle}>Crop Prediction</Text>
-      <Text style={styles.cardText}>Sensor Data: Moisture: 30%, Temperature: 25°C</Text>
+      <Text style={styles.cardTitle}>Crop Classification</Text>
+      <Text style={styles.cardText}>We are working with a variety of crops which can be classified for production basing on the sensor data provided.</Text>
       <Button
-        title="View Data"
-        onPress={() => navigation.navigate('Data')}
-        buttonStyle={styles.button}
-      />
-    </Card>
+       
+       title="View More"
+       onPress={showCrop} 
+       buttonStyle={styles.button}
+     />
+   </Card>
 
     <Card containerStyle={styles.card2}>
-      <Text style={styles.cardTitle}>Crop pests and disease Prediction</Text>
-      <Text style={styles.cardText}>This is some additional information you want to display.</Text>
+      <Text style={styles.cardTitle}>Crop disease Prediction</Text>
+      <Text style={styles.cardText}>This is some additional information about Maize disease Prediction.</Text>
       <Button
+       
         title="View More"
-        onPress={() => navigation.navigate('More')}
+        onPress={showAlert} 
         buttonStyle={styles.button}
       />
     </Card>
     <Card containerStyle={styles.card3}>
-      <Text style={styles.cardTitle}>Crop Price prediction</Text>
-      <Text style={styles.cardText}>Sensor Data: </Text>
+      <Text style={styles.cardTitle}>Guide</Text>
+      <Text style={styles.cardText}>A complete guide is provided to help you use this app efficiently </Text>
       <Button
-        title="View Data"
-        
+        title="View Guide"
+        onPress={() => navigation.navigate('Guide')}
         buttonStyle={styles.button}
       />
     </Card>

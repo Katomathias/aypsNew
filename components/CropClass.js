@@ -143,8 +143,9 @@ const CropClass = () => {
     
      
     <ImageBackground source={require('../assets/crop.jpg')} style={styles.backgroundImage}>
-      <ScrollView>
+      
     <View style={styles.container}>
+    <ScrollView>
     <Image source={require('../assets/farmer.jpg')} style={styles.logo}/>
       {Object.keys(sensorData).map((key) => (
         <TextInput 
@@ -159,10 +160,12 @@ const CropClass = () => {
       <Button title="Predict Crop" onPress={handleSubmit} />
       {prediction && <Text style={{ marginBottom: 10, borderBottomWidth: 1 ,color: 'black', fontSize: 22, }}>Prediction: {prediction}</Text>}
       {error && <Text style={{ color: 'red' }}>{error}</Text>}
+
+      </ScrollView>
     </View>
     
     
-    </ScrollView>
+
     </ImageBackground>
   );
 };
@@ -176,7 +179,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         padding: 16,
         alignContent: 'center',
-
+        flex: 1,
+        backgroundColor: '#D4E6D4', // Semi-transparent overlay
     },
     input: {
         height: 40,

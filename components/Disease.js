@@ -1,167 +1,97 @@
-// import React, { useEffect, useState } from 'react';
-// import { View, Text, Image, Button, ImageBackground } from 'react-native';
-// import * as ImagePicker from 'expo-image-picker';
-// import * as FileSystem from 'expo-file-system';
+/////////////////////////////////////////////////////////////////28/06/2024
 
-// const Disease = () => {
-//   const [result, setResult] = useState('');
-//   const [pickedImage, setPickedImage] = useState('');
-
-//   // Function to call the image picker and enable the user to choose an image for classification
-//   const pickImage = async () => {
-//     let result = await ImagePicker.launchImageLibraryAsync({
-//       mediaTypes: ImagePicker.MediaTypeOptions.All,
-//       allowsEditing: true,
-//       aspect: [4, 3],
-//       quality: 1,
-//     });
-
-//     if (!result.cancelled) {
-//       setPickedImage(result.uri);
-//       classifyImage(result.uri);
-//     }
-//   };
-
-//   // Function to classify the selected image using the Django backend
-//   const classifyImage = async (imageUri) => {
-//     try {
-//       const imageData = await FileSystem.readAsStringAsync(imageUri, {
-//         encoding: FileSystem.EncodingType.Base64,
-//       });
-
-//       const formData = new FormData();
-//       formData.append('image', {
-//         uri: imageUri,
-//         name: 'photo.jpg',
-//         type: 'image/jpeg',
-//       });
-
-//       const response = await fetch('http://127.0.0.1:8000/api/predict/', {
-//         method: 'POST',
-//         headers: {
-//           'Content-Type': 'multipart/form-data',
-//         },
-//         body: formData,
-//       });
-
-//       const data = await response.json();
-//       setResult(data.result);
-//     } catch (err) {
-//       console.log(err);
-//     }
-//   };
-
-//   return (
-//     <ImageBackground source={require('../assets/wall1.jpg')} style={styles.backgroundImage}>
-//     <View
-//       style={{
-//         height: '100%',
-//         display: 'flex',
-//         flexDirection: 'column',
-//         alignItems: 'center',
-//         justifyContent: 'center',
-//       }}
-//     >
-//       {/* Show the picked image */}
-//       <Image
-//         source={{ uri: pickedImage }}
-//         style={{ width: 200, height: 200, margin: 40 }}
-//       />
-//       {/* Show a button to open the image picker */}
-//       <Button
-//         title="Pick an image"
-//         onPress={pickImage}
-//       />
-//       <View style={{ width: '100%', height: 20 }} />
-//       {/* Display the state and result of processing */}
-//       {result === '' ? <Text>Pick an image to classify!</Text> : <Text>{result}</Text>}
-//     </View>
-//     </ImageBackground>
-//   );
-// };
-
-// export default Disease;
-
-
-// src/DiseasePrediction.js
 import React, { useState } from 'react';
-import { View, Button, Image, Text, StyleSheet, Picker } from 'react-native';
+import { Button, Image, View, Text } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
-import { uploadImage } from './services/api';
+import axios from 'axios';
 
-export default function DiseasePrediction() {
-    const [selectedImage, setSelectedImage] = useState(null);
-    const [prediction, setPrediction] = useState(null);
-    const [cropType, setCropType] = useState('maize');
+const Disease = () => {
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [prediction, setPrediction] = useState(null);
+  const [error, setError] = useState(null);
 
-    const pickImage = async () => {
-        let result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ImagePicker.MediaTypeOptions.Images,
-            allowsEditing: true,
-            aspect: [4, 3],
-            quality: 1,
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    if (!result.canceled) {
+      setSelectedImage(result.assets[0].uri);
+    }
+  };
+
+  const takePhoto = async () => {
+    let result = await ImagePicker.launchCameraAsync({
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    if (!result.canceled) {
+      setSelectedImage(result.assets[0].uri);
+    }
+  };
+
+  const uploadImage = async () => {
+    if (selectedImage) {
+      let formData = new FormData();
+      formData.append('image', {
+        uri: selectedImage,
+        name: 'photo.jpg',
+        type: 'image/jpeg',
+      });
+      
+      console.log('Form Data:', formData);
+
+      try {
+        const response = await axios.post('http://192.168.43.5:8000/api/upload-image/', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
         });
-
-        if (!result.canceled) {
-            setSelectedImage(result.uri);
+        setPrediction(response.data.prediction);
+        setError(null); // Clear any previous error
+      } catch (error) {
+        if (error.response) {
+          // Server responded with a status other than 200 range
+          console.error('Server Error:', error.response.data);
+          setError(`Server Error: ${error.response.data}`);
+        } else if (error.request) {
+          // Request was made but no response was received
+          console.error('Network Error:', error.request);
+          setError('Network Error: Please check your connection and try again.');
+        } else {
+          // Something else caused the error
+          console.error('Error:', error.message);
+          setError(`Error: ${error.message}`);
         }
-    };
+      }
+    } else {
+      setError('Please select an image.');
+    }
+  };
 
-    const handleSubmit = async () => {
-        const formData = new FormData();
-        formData.append('image', {
-            uri: selectedImage,
-            name: 'photo.jpg',
-            type: 'image/jpeg',
-        });
-        formData.append('crop_type', cropType);
+  const resetState = () => {
+    setSelectedImage(null);
+    setPrediction(null);
+    setError(null);
+  };
 
-        try {
-            const response = await uploadImage(formData);
-            setPrediction(response.data.disease);
-        } catch (error) {
-            console.error(error);
-        }
-    };
-
-    return (
-        <View style={styles.container}>
-            <Picker
-                selectedValue={cropType}
-                style={styles.picker}
-                onValueChange={(itemValue) => setCropType(itemValue)}
-            >
-                <Picker.Item label="Maize" value="maize" />
-                <Picker.Item label="Cassava" value="cassava" />
-            </Picker>
-            <Button title="Pick an image from camera roll" onPress={pickImage} />
-            {selectedImage && <Image source={{ uri: selectedImage }} style={styles.image} />}
-            <Button title="Predict Disease" onPress={handleSubmit} />
-            {prediction && <Text style={styles.result}>{prediction}</Text>}
-        </View>
-    );
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Button title="Pick an image from camera roll" onPress={pickImage} />
+      <Button title="Take a photo" onPress={takePhoto} />
+      {selectedImage && <Image source={{ uri: selectedImage }} style={{ width: 200, height: 200 }} />}
+      <Button title="Upload Image" onPress={uploadImage} />
+      <Button title="Refresh" onPress={resetState} />
+      {prediction !== null && <Text>Prediction: {prediction}</Text>}
+      {error && <Text style={{ color: 'red' }}>{error}</Text>}
+    </View>
+  );
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        padding: 16,
-    },
-    picker: {
-        height: 50,
-        width: '100%',
-    },
-    image: {
-        width: 200,
-        height: 200,
-        marginTop: 20,
-        alignSelf: 'center',
-    },
-    result: {
-        marginTop: 20,
-        fontSize: 18,
-        fontWeight: 'bold',
-        textAlign: 'center',
-    },
-});
+export default Disease;
+
