@@ -32,12 +32,12 @@ export default function App() {
 
 
           {/* <Stack.Screen name="RegisterScreen" component={RegisterScreen} /> */}
-              
+             
               <Stack.Screen name="HomeDrawer" component={MainTabScreen} />
               <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
               <Stack.Screen name="Signin" component={SignIn} />
               <Stack.Screen name="SplashScreen" component={SplashScreen} />  
-              <Stack.Screen name="CropClass" component={CropClass} />   
+              <Stack.Screen name="CropClass" component={CropClass} /> 
               <Stack.Screen name="Disease" component={Disease} />
               <Stack.Screen name="Guide" component={Guide} />
               <Stack.Screen name="forecast" component={Forecast} />

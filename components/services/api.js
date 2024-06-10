@@ -1,4 +1,4 @@
-const BASE_URL = 'http://172.50.1.203:8000/api';
+const BASE_URL = 'http://192.168.43.5:8000/api';
 
 // export const getSensorData = async () => {
 //     const response = await fetch(`${BASE_URL}/sensor-data/`);
