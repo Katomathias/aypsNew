@@ -16,6 +16,7 @@ import LogOut from './components/LogOut';
 import Forecast from './components/Forecast';
 import Linkss from './components/Linkss';
 import Guide from './components/Guide';
+import Explore from './components/Explore';
 
 
 
@@ -32,7 +33,7 @@ export default function App() {
 
 
           {/* <Stack.Screen name="RegisterScreen" component={RegisterScreen} /> */}
-             
+          
               <Stack.Screen name="HomeDrawer" component={MainTabScreen} />
               <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
               <Stack.Screen name="Signin" component={SignIn} />
@@ -47,7 +48,7 @@ export default function App() {
               <Stack.Screen name="About" component={AboutUs} />
               <Stack.Screen name="Contact Us" component={ContactUs} />
               <Stack.Screen name="Log Out" component={LogOut} />
-        
+              <Stack.Screen name="Explore" component={Explore} />
         </Stack.Navigator>
       </NavigationContainer>
     

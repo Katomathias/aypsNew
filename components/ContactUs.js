@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, ImageBackground } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, ImageBackground , Button, Alert} from 'react-native';
 
-const ContactUs = () => {
+const ContactUs = ({navigation}) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
@@ -16,6 +16,7 @@ const ContactUs = () => {
     setEmail('');
     setMessage('');
     // Provide feedback to the user, e.g., "Message sent successfully" or handle errors
+    Alert.alert("Message Received, Thanks for your message")
   };
 
   return (
@@ -49,6 +50,10 @@ const ContactUs = () => {
       <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
         <Text style={styles.submitButtonText}>Submit</Text>
       </TouchableOpacity>
+      <Button 
+        title="Go Back"
+        onPress={() => navigation.navigate('Explore')}
+      />
     </View>
     </ImageBackground>
   );

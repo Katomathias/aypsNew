@@ -1,8 +1,8 @@
 
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Linking, } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Linking, Button } from 'react-native';
 
-const Linkss = () => {
+const Linkss = ({navigation}) => {
   const links = [
     { id: '1', title: 'Agricultural News', url: 'https://www.monitor.co.ug/uganda/magazines/farming' },
     { id: '2', title: 'Crop Management Techniques', url: 'https://agrierp.com/blog/integrated-crop-management/' },
@@ -23,6 +23,12 @@ const Linkss = () => {
           <Text style={styles.title}>{link.title}</Text>
         </TouchableOpacity>
       ))}
+      <View>
+      <Button 
+        title="Go Back"
+        onPress={() => navigation.navigate('Explore')}
+      />
+      </View>
     </View>
   
   );

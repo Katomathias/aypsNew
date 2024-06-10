@@ -101,6 +101,13 @@ const Weatherr = ({ navigation }) => {
                     }]}>See Weather Forecast</Text>
         </View>
       )}
+
+      <View>
+      <Button 
+        title="Go Back"
+        onPress={() => navigation.navigate('Explore')}
+      />
+      </View>
     </View>
     </ImageBackground>
   );

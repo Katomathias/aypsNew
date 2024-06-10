@@ -1,7 +1,7 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView, Image, ImageBackground, SafeAreaView } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Image, ImageBackground, SafeAreaView, Button } from 'react-native';
 
-const AboutUs = () => {
+const AboutUs = ({ navigation }) => {
   return (
     <SafeAreaView>
     <ImageBackground source={require('../assets/about.jpg')} style={styles.backgroundImage}>
@@ -46,7 +46,10 @@ const AboutUs = () => {
       and a sustainable agricultural future. {'\n'}   </Text>
       <Text style={styles.description1}>  Join us in shaping the future of agriculture with AYPS! </Text>
 
-      
+      <Button 
+        title="Go Back"
+        onPress={() => navigation.navigate('Explore')}
+      />
       {/* Add more details as needed */}
     </ScrollView>
     </ImageBackground>

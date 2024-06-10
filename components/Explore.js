@@ -231,7 +231,7 @@
 
 
 import React from 'react';
-import { View, Text, StyleSheet, ImageBackground, TouchableOpacity, FlatList } from 'react-native';
+import { View, Text, StyleSheet, ImageBackground, TouchableOpacity, FlatList, Button } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
@@ -264,6 +264,7 @@ const Explore = ({ navigation }) => {
 
   return (
     <ImageBackground source={require('../assets/crop.jpg')} style={styles.backgroundImage}>
+      <View>
       <FlatList 
         data={cards}
         renderItem={renderItem}
@@ -271,9 +272,11 @@ const Explore = ({ navigation }) => {
         numColumns={3}
         contentContainerStyle={styles.grid}
       />
-
- 
- 
+        <Button 
+        title="Go to Home"
+        onPress={() => navigation.navigate('HomeDrawer')}
+      />
+      </View>
     </ImageBackground>
   );
 };

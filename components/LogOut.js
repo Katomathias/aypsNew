@@ -64,7 +64,7 @@
 // export default LogOut;
 
 import React from 'react';
-import { TouchableOpacity, Text, StyleSheet, Alert, Button, navigation } from 'react-native';
+import { TouchableOpacity, Text, StyleSheet, Alert, Button, navigation, View } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 // import { useNavigation } from '@react-navigation/native';
 // import { StackActions } from '@react-navigation/native';
@@ -99,13 +99,22 @@ const LogOut = ({navigation}) => {
   };
 
   return (
-    
-
         
-        <TouchableOpacity onPress={handleLogout} style={styles.button}>
+        <View style={styles.container}>
+          <View>
+          <TouchableOpacity onPress={handleLogout} style={styles.button}>
         <Text style={styles.buttonText}>Logout</Text>
        </TouchableOpacity>
 
+          </View>
+
+       <View>
+       <Button style={{padding:20, flex: 1}}
+        title="Go Back"
+        onPress={() => navigation.navigate('Explore')}
+      />
+       </View>
+       </View>
 
       //    <Button
       //    title="Logout"
@@ -117,11 +126,18 @@ const LogOut = ({navigation}) => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'space',
+    justifyContent: 'center',
+    backgroundColor: '#0B3954', // Semi-transparent overlay
+  },
   button: {
     backgroundColor: '#ff6347', // Coral color
     padding: 10,
     borderRadius: 5,
     alignItems: 'center',
+    
   },
   buttonText: {
     color: 'white',

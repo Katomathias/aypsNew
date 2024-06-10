@@ -176,7 +176,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 const API_KEY = '200925c7f0d3c72962ec4a19e6c4ad30';
 
-const Forecast = () => {
+const Forecast = ({navigation}) => {
   const [location, setLocation] = useState(null);
   const [weatherData, setWeatherData] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -237,6 +237,12 @@ const Forecast = () => {
     <ImageBackground source={require('../assets/weather.jpg')} style={styles.backgroundImage}>
       <ScrollView>
         <View style={styles.container}>
+          <View>
+          <Button 
+        title="Go Back"
+        onPress={() => navigation.navigate('Weather')}
+      />
+          </View>
           <Text style={styles.heading}>Weather Forecast</Text>
           {loading && <Text>Loading...</Text>}
           {error && <Text style={styles.error}>{error}</Text>}
