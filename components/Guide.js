@@ -102,6 +102,7 @@
 
 import React from 'react';
 import { ScrollView, View, Text, StyleSheet, Button, Alert, ImageBackground } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const Guide = ({ navigation }) => {
   const showAlert = () => {
@@ -116,8 +117,16 @@ const Guide = ({ navigation }) => {
   };
 
   return (
+    
     <ImageBackground source={require('../assets/wall.jpg')} style={styles.backgroundImage}>
+     
       <View style={styles.overlay}>
+      <View>
+          <Button 
+        title="Go Back"
+        onPress={() => navigation.navigate('HomeDrawer')}
+      />
+          </View>
         <ScrollView style={styles.container}>
           <Text style={styles.header}>User Manual</Text>
           <Text style={styles.sectionHeader}>1. Introduction</Text>
@@ -167,9 +176,11 @@ const Guide = ({ navigation }) => {
           <Text style={styles.paragraph}>
             We hope this manual helps you navigate through the app. If you have any questions or need further assistance, feel free to reach out to our support team.
           </Text>
+          
         </ScrollView>
       </View>
     </ImageBackground>
+    
   );
 }
 

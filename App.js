@@ -27,26 +27,27 @@ export default function App() {
       <NavigationContainer>
         <Stack.Navigator screenOptions={{
               headerShown: false,
+              
             }} >
           {/* <Stack.Navigator initialRouteName="CropClass"></Stack.Navigator>     */}
 
 
 
-          {/* <Stack.Screen name="RegisterScreen" component={RegisterScreen} /> */}
-          
+         
+              <Stack.Screen name="SplashScreen" component={SplashScreen} /> 
               <Stack.Screen name="HomeDrawer" component={MainTabScreen} />
               <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
-              <Stack.Screen name="Signin" component={SignIn} />
-              <Stack.Screen name="SplashScreen" component={SplashScreen} />  
+              <Stack.Screen name="Signin" component={SignIn} /> 
               <Stack.Screen name="CropClass" component={CropClass} /> 
               <Stack.Screen name="Disease" component={Disease} />
               <Stack.Screen name="Guide" component={Guide} />
+              <Stack.Screen name="Contact Us" component={ContactUs} />
               <Stack.Screen name="forecast" component={Forecast} />
               <Stack.Screen name="Home" component={HomeScreen} />
               <Stack.Screen name="Linkss" component={Linkss} />
               <Stack.Screen name="Weather" component={Weatherr} />
               <Stack.Screen name="About" component={AboutUs} />
-              <Stack.Screen name="Contact Us" component={ContactUs} />
+              
               <Stack.Screen name="Log Out" component={LogOut} />
               <Stack.Screen name="Explore" component={Explore} />
         </Stack.Navigator>

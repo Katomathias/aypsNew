@@ -91,7 +91,7 @@ const LogOut = ({navigation}) => {
       //   StackActions.replace('Splash')
       // );
       
-        navigation.navigate('Splash');
+        navigation.navigate('SplashScreen');
   
     } catch (error) {
       console.error('Error logging out:', error);
