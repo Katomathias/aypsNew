@@ -220,7 +220,7 @@ export default function Disease() {
 
  const sendInferenceRequest = async (imageUrl) => {
   if (imageUrl) {
-    const endpointUrl = "http://192.168.43.5:8000/api/upload-image/";
+    const endpointUrl = "http://49.13.143.118:8005/api/upload-image/";
     const requestData = {
       "image_url": imageUrl,
     };

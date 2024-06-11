@@ -121,9 +121,9 @@ const developers = [
   {
     id: '2',
     name: 'Mugerwa Muhammad',
-    role: 'Backend Developer',
+    role: 'Data Scientist',
     email: 'mugerwa234@gmail.com',
-    phone: '+1256 759078405',
+    phone: '+256 759078405',
   },
   {
     id: '3',
@@ -136,7 +136,7 @@ const developers = [
     id: '4',
     name: 'Ojune Emmanuel',
     role: 'Embedded systems Engineer',
-    email: 'OjuneE@gmail.com',
+    email: 'emmaojune37@gmail.com',
     phone: '+256 757928668',
   },
 ];
